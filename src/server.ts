@@ -1,6 +1,6 @@
-import drawSlide from './utils/draw-slide'
+import { createPpt } from './utils/draw-slide'
 
-drawSlide()
+createPpt()
 
 setInterval(() => {
   console.log('Tick...')

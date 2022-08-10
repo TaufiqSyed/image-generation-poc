@@ -4,19 +4,36 @@ import util from 'util'
 
 const writeFile = util.promisify(fs.writeFile)
 
-const drawSlide = async () => {
+export const createPpt = async () => {
+  const start = Date.now()
+  for (let i = 0; i < 50; i++) {
+    await drawSlide(`slide${i.toString()}`)
+  }
+  const stop = Date.now()
+  console.log(`Time taken to execute = ${(stop - start) / 1000} seconds`)
+}
+
+export const drawSlide = async (filename: string) => {
   // Fetch data...
   const clientJoinDate: String = 'July 2005'
   const accountId: String = '37007'
 
-  const width = 1200
-  const height = 627
+  const width = 1280
+  const height = 720
 
   const canvas = createCanvas(width, height)
   const context = canvas.getContext('2d')
 
-  context.fillStyle = '#181818'
-  context.fillRect(0, 0, width, height)
+  const backgroundImage = await loadImage('public/images/mojave_night.jpg')
+
+  const imagePosition = {
+    w: 1280,
+    h: 720,
+    x: 0,
+    y: 0,
+  }
+  const { w, h, x, y } = imagePosition
+  context.drawImage(backgroundImage, x, y, w, h)
 
   context.font = "24pt 'PT Sans'"
   context.fillStyle = '#fff'
@@ -30,19 +47,6 @@ const drawSlide = async () => {
     100
   )
 
-  const tfoLogoImage = await loadImage('public/images/tfo-logo.png')
-
-  const imagePosition = {
-    w: 175,
-    h: 115,
-    x: 25,
-    y: 25,
-  }
-  const { w, h, x, y } = imagePosition
-  context.drawImage(tfoLogoImage, x, y, w, h)
-
   const buffer = canvas.toBuffer('image/png')
-  await writeFile('assets/images/myImage.png', buffer)
+  await writeFile(`assets/images/${filename}.png`, buffer)
 }
-
-export default drawSlide
