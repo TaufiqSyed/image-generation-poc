@@ -1,3 +1,3 @@
-import createSlide from './createSlide'
+import { createPpt } from './createSlide'
 
-createSlide()
+createPpt()
