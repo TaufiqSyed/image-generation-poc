@@ -2,23 +2,21 @@ import { Canvas, loadImage } from 'skia-canvas'
 
 const createPpt = async () => {
   const start = Date.now()
-  for (let i = 0; i < 10; i++) {
-    await drawSlide(`slide${i.toString()}`)
-  }
+  const N = 100
+  const arr = Array.from({ length: N }, (_, index) => index + 1)
+  await Promise.all(arr.map((e) => drawSlide(`slide${e.toString()}`)))
   const stop = Date.now()
   console.log(`Time taken to execute = ${(stop - start) / 1000} seconds`)
 }
 
 const drawSlide = async (filename: string) => {
-  const canvas = new Canvas(1280, 720),
-    ctx = canvas.getContext('2d')
-
+  const canvas = new Canvas(1280, 720)
+  const ctx = canvas.getContext('2d')
+  // console.log(canvas)
   // const image = await loadImage('/assets/image/mojave_night.png')
-  const image = await loadImage(
-    '/home/tfqsy/Projects/image-generation-poc/assets/images/mojave_night.jpg'
-  )
+  const image = await loadImage('assets/images/mojave_night.jpg')
   ctx.drawImage(image, 0, 0, 1280, 720)
-  canvas.saveAs('assets/images/slide.png', { density: 2 })
+  await canvas.saveAs(`public/images/${filename}.png`)
 }
 
 createPpt()
