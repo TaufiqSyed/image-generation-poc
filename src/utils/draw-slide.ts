@@ -6,9 +6,11 @@ const writeFile = util.promisify(fs.writeFile)
 
 export const createPpt = async () => {
   const start = Date.now()
-  for (let i = 0; i < 50; i++) {
-    await drawSlide(`slide${i.toString()}`)
-  }
+  const N = 10
+
+  await Promise.all(
+    new Array(N).fill(0).map((_, idx) => drawSlide(`slide${idx.toString()}`))
+  )
   const stop = Date.now()
   console.log(`Time taken to execute = ${(stop - start) / 1000} seconds`)
 }
