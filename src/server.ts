@@ -1,38 +1,20 @@
 import { Canvas, loadImage } from 'skia-canvas'
 
-const createPpt = async () => {
-  const start = Date.now()
-  const N = 100
-  const arr = Array.from({ length: N }, (_, index) => index + 1)
-  await Promise.all(arr.map((e) => drawSlide(`slide${e.toString()}`)))
-  const stop = Date.now()
-  console.log(`Time taken to execute = ${(stop - start) / 1000} seconds`)
+const canvas = new Canvas(1920, 1080)
+const ctx = canvas.getContext('2d')
+
+console.log(canvas.gpu)
+
+async function render() {
+  const backgroundImage = await loadImage(
+    'public/images/synthesia_background_image.png'
+  )
+  ctx.drawImage(backgroundImage, 0, 0, 1920, 1080)
+  const logoImage = await loadImage('public/images/tfo_logo_white.png')
+  ctx.drawImage(logoImage, 70, 50, 200, 98)
+  await canvas.saveAs('generated/images/rainbox.png')
 }
-
-const drawSlide = async (filename: string) => {
-  const canvas = new Canvas(1280, 720)
-  const ctx = canvas.getContext('2d')
-  // console.log(canvas)
-  // const image = await loadImage('/assets/image/mojave_night.png')
-  const image = await loadImage('assets/images/mojave_night.jpg')
-  ctx.drawImage(image, 0, 0, 1280, 720)
-  await canvas.saveAs(`public/images/${filename}.png`)
-}
-
-createPpt()
-
-// render to multiple destinations using a background thread
-// async function render() {
-//   // save a ‘retina’ image...
-//   await canvas.saveAs('rainbox.png', { density: 2 })
-//   // ...or use a shorthand for canvas.toBuffer("png")
-//   let pngData = await canvas.png
-//   // ...or embed it in a string
-//   let pngEmbed = `<img src="${await canvas.toDataURL('png')}">`
-// }
-// render()
+render()
 
 // ...or save the file synchronously from the main thread
-// canvas.saveAsSync('rainbox.pdf')
-
-// canvas.saveAsSync('rainbow.pdf')
+// canvas.saveAsSync("rainbox.pdf")

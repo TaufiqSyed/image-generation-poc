@@ -163,13 +163,6 @@
     "@types/mime" "*"
     "@types/node" "*"
 
-"@types/skia-canvas@^0.9.28":
-  version "0.9.28"
-  resolved "https://registry.yarnpkg.com/@types/skia-canvas/-/skia-canvas-0.9.28.tgz#31a25599c02d8476fb6547bb55803018bb6ec7d5"
-  integrity sha512-buN0xnXKC2TvCMGdA3uFTzdTXgcyNBbbHwkSOnt9buxhhvz5UXyDEw9oWjm3T1tjFr7M4ycUZZhLSGL+nke6+g==
-  dependencies:
-    skia-canvas "*"
-
 "@types/strip-bom@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/strip-bom/-/strip-bom-3.0.0.tgz#14a8ec3956c2e81edb7520790aecf21c290aebd2"
@@ -1226,10 +1219,9 @@ simple-get@^4.0.1:
     once "^1.3.1"
     simple-concat "^1.0.0"
 
-skia-canvas@*, skia-canvas@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/skia-canvas/-/skia-canvas-1.0.0.tgz#9c4cfabb65f722bb3dc27d5411eccbb153004f78"
-  integrity sha512-Ec7R7hNdJb1nES/oVryIuQ9rgcpjA1Zjjr7JG718BC7AQBJWaKHRiypOJb7g1V0Msk4YKoPIdvGYY0cnkOoDow==
+"skia-canvas@https://github.com/samizdatco/skia-canvas":
+  version "1.0.1-rc2"
+  resolved "https://github.com/samizdatco/skia-canvas#84b7c397242d4761a830e195a03450ae87d81d59"
   dependencies:
     "@mapbox/node-pre-gyp" "^1.0.9"
     cargo-cp-artifact "^0.1"
